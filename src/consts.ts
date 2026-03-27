@@ -1,11 +1,11 @@
 import type { IconMap, SocialLink, Site } from '@/types'
-
+// central configuration file
 export const SITE: Site = {
-  title: 'astro-erudite',
+  title: 'doni at interweb',
   description:
-    'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
+    'fragments of ideas, stills, and moments I find worth keeping. A mix of visual work, experiments, and software projects that reflect how I think and build. My name\'s Allan aka doni',
   href: 'https://astro-erudite.vercel.app',
-  author: 'jktrn',
+  author: 'doni',
   locale: 'en-US',
   featuredPostCount: 2,
   postsPerPage: 3,
@@ -17,26 +17,26 @@ export const NAV_LINKS: SocialLink[] = [
     label: 'blog',
   },
   {
-    href: '/authors',
-    label: 'authors',
-  },
-  {
     href: '/about',
     label: 'about',
   },
+  {
+    href: '/gallery',
+    label: 'gallery'
+  }
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    href: 'https://github.com/jktrn',
+    href: `https://github.com/${import.meta.env.PUBLIC_GITHUB}`,
     label: 'GitHub',
   },
   {
-    href: 'https://twitter.com/enscry',
-    label: 'Twitter',
+    href: `https://www.linkedin.com/in/${import.meta.env.PUBLIC_LINKEDIN}`,
+    label: 'LinkedIn',
   },
   {
-    href: 'mailto:jason@enscribe.dev',
+    href: `mailto:${import.meta.env.PUBLIC_EMAIL}`,
     label: 'Email',
   },
   {
@@ -49,7 +49,6 @@ export const ICON_MAP: IconMap = {
   Website: 'lucide:globe',
   GitHub: 'lucide:github',
   LinkedIn: 'lucide:linkedin',
-  Twitter: 'lucide:twitter',
   Email: 'lucide:mail',
   RSS: 'lucide:rss',
 }
