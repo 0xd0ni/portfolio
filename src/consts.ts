@@ -4,7 +4,7 @@ export const SITE: Site = {
   title: 'doni at interweb',
   description:
     'fragments of ideas, stills, and moments I find worth keeping. A mix of visual work, experiments, and software projects that reflect how I think and build. My name\'s Allan aka doni',
-  href: 'https://astro-erudite.vercel.app',
+  href: 'https://doniatinterweb.pages.dev',
   author: 'doni',
   locale: 'en-US',
   featuredPostCount: 2,
