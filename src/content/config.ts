@@ -18,11 +18,11 @@ export function r2Loader(prefixes: string | string[]): Loader {
           const result = await r2.list({ prefix, continuationToken })
 
           for (const obj of result.contents ?? []) {
-            if (!obj.key.match(/\.(jpg|jpeg|png|webp|avif)$/i)) continue
+            if (!obj.key.match(/\.(avif)$/i)) continue
 
             // Use the full key as the id to avoid collisions across prefixes
             const id = obj.key
-            const publicUrl = `${import.meta.env.R2_PUBLIC_DOMAIN}${obj.key}`
+            const publicUrl = `${import.meta.env.R2_CUSTOM_DOMAIN}${obj.key}`
             const title = obj.key.split('/').pop()?.split('.')[0] ?? 'Untitled'
 
             const data = await parseData({

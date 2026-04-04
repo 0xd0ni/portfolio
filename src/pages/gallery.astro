@@ -1,0 +1,48 @@
+---
+import Breadcrumbs from '@/components/breadcrumbs.astro'
+import GalleryCard from '@/components/gallery-card.astro'
+import PageHead from '@/components/page-head.astro'
+import Layout from '@/layouts/layout.astro'
+import { getCollection } from 'astro:content'
+
+const entries = await getCollection('albums')
+
+// Group entries by album name, pick a random cover from each
+const albumMap = new Map<string, typeof entries>()
+for (const entry of entries) {
+  const name = entry.data.album
+  if (!albumMap.has(name)) albumMap.set(name, [])
+  albumMap.get(name)!.push(entry)
+}
+
+const albums = [...albumMap.entries()]
+  .map(([name, photos]) => {
+    const cover = photos[1]
+    return {
+      name,
+      cover: cover.data.cover,
+      coverAlt: cover.data.coverAlt,
+      count: photos.length,
+      pubDate: photos[0].data.pubDate,
+    }
+  })
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="Gallery" />
+  <Breadcrumbs items={[{ label: 'Gallery', icon: 'lucide:album' }]} />
+
+  <section>
+    <div class="prose mb-8">
+      <h3 class="text-2xl  mt-0 lg:mt-4 leading-none font-medium">photo & film dude</h3>
+      <!-- <h3 class="mt-100 text-2xl leading-none font-medium lg:mt-4">photo & film dude</h3> -->
+      <p class="mb-4">
+        TODO
+      </p>
+      <div class="grid lg:grid-cols-2 gap-4">
+        {albums.map((album) => <GalleryCard album={album} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

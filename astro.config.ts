@@ -20,7 +20,7 @@ import type { ExpressiveCodeTheme } from 'rehype-expressive-code'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  site: 'https://doniatinterweb.pages.dev',
+  site: 'https://doniatinterweb.xyz',
   integrations: [mdx(), react(), sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],
@@ -103,5 +103,12 @@ export default defineConfig({
       ],
     ],
     remarkPlugins: [remarkMath, remarkEmoji],
+  },
+  image: {
+    // note that: domain expect hostnames, not full URLs
+    domains: [ "astro.build",`${process.env.R2_DOMAIN}`],
+    remotePatterns: [{ protocol: 'https' }],
+    layout: 'constrained',
+    responsiveStyles: true,
   },
 })

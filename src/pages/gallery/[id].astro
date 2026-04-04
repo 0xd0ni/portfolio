@@ -1,0 +1,60 @@
+---
+import Breadcrumbs from '@/components/breadcrumbs.astro'
+import FancyBox from '@/components/fancybox.astro'
+import GalleryLayout from '@/layouts/gallery.astro'
+
+import { getAlbumImages } from '@/lib/data-utils'
+import { readFileSync } from 'node:fs'
+import { parse } from 'smol-toml'
+
+export async function getStaticPaths() {
+  const { albums } = parse(
+    readFileSync('./src/content/gallery/albums.toml', 'utf-8'),
+  ) as { albums: string[] }
+
+  return albums.map((id) => ({ params: { id } }))
+}
+
+const { id } = Astro.params
+
+const images = await getAlbumImages(id)
+---
+
+<GalleryLayout>
+  <div class="col-start-2">
+    <Breadcrumbs
+      items={[
+        { href: '/gallery', label: 'Gallery', icon: 'lucide:library-big' },
+        { href: `/gallery/${id}`, label: id, icon: 'lucide:library-big' },
+      ]}
+    />
+  </div>
+
+  <div class="text-center">
+    <section class="col-start-2 mb-4 flex flex-col gap-y-6 text-left">
+      <div class="flex flex-col">
+        <div class="flex items-baseline justify-between">
+          <h1
+            class="text-2xl leading-tight font-medium text-pretty capitalize sm:text-3xl"
+          >
+            {id}
+          </h1>
+          <p class="mx-2">
+            ⇐
+            <a
+              href="/gallery/"
+              class="decoration-muted-foreground underline underline-offset-[3px]"
+            >
+              back
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="mt-4">
+      <FancyBox images={images} />
+    </section>
+  </div>
+</GalleryLayout>
+
+

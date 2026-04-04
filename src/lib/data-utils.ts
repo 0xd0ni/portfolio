@@ -302,3 +302,13 @@ export async function getTOCSections(postId: string): Promise<TOCSection[]> {
 
   return sections
 }
+
+export async function getAlbumImages(albumId: string): Promise<string[]
+> {
+  const entries = await getCollection('albums')
+  // returns an array of R2 URLs that represent images
+  // of a particular album
+  return entries
+    .filter((e) => e.data.album === albumId)
+    .map((e) => e.data.cover)
+}

@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets'
+import '@fancyapps/ui/dist/fancybox/fancybox.css'
+
+interface Props {
+  images: string[]
+}
+
+const { images } = Astro.props
+
+// Distribute images across 3 columns by index to
+// create a masonry-style layout
+const col1 = images.filter((_, i) => i % 3 === 0)
+const col2 = images.filter((_, i) => i % 3 === 1)
+const col3 = images.filter((_, i) => i % 3 === 2)
+---
+
+<div
+  id="gallery"
+  class="container mx-auto grid grid-cols-1 gap-4 pb-2 md:grid-cols-3 md:gap-2"
+>
+  {
+    [col1, col2, col3].map((col) => (
+      <div class="grid h-full grid-cols-1 gap-4 lg:gap-2">
+        {col.map((src) => (
+          <a
+            href={src}
+            data-fancybox="gallery"
+            target="_blank"
+            class="border-secondary overflow-hidden border-[1px]"
+          >
+            <Image
+              src={src}
+              inferSize={true}
+              quality={85}
+              format="avif"
+              loading="lazy"
+              alt=""
+              class="w-full object-bottom transition duration-300 ease-in-out lg:h-full lg:w-auto lg:object-cover"
+            />
+          </a>
+        ))}
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  import { Fancybox } from '@fancyapps/ui/dist/fancybox/'
+
+  document.addEventListener('astro:page-load', () => {
+    Fancybox.bind('[data-fancybox]', {
+      theme: 'auto',
+      mainStyle: {
+        '--f-button-width': '44px',
+        '--f-button-height': '44px',
+        '--f-button-border-radius': '50%',
+        '--f-toolbar-padding': '16px',
+      },
+      Carousel: {
+        Arrows: false,
+        Toolbar: {
+          display: {
+            left: [],
+            middle: [],
+            right: ['close'],
+          },
+        },
+        transition: 'slide',
+      },
+    })
+  })
+
+  document.addEventListener('astro:before-swap', () => {
+    Fancybox.destroy()
+  })
+</script>
