@@ -23,7 +23,12 @@ export const NAV_LINKS: SocialLink[] = [
   {
     href: '/gallery',
     label: 'gallery'
+  },
+  {
+    href: '/uses',
+    label: 'uses'
   }
+  
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
