@@ -15,55 +15,75 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
   <section>
     <div class="card-offset mx-0 p-6 lg:px-8">
       <div class="flex flex-col space-y-1.5 pb-4">
-
-        <h3 class="text-3xl leading-none font-bold text-accent-foreground">Hi, I'm Allan</h3> 
+        <h3 class="text-accent-foreground text-3xl leading-none font-bold">
+          Hi, I'm Allan
+        </h3>
         <p class="text-foreground text-md">
-        also known as, <span class="font-cooper">doni</span>
+          also known as, <span class="font-space-grotesk-bold">doni</span>
         </p>
         <p class="text-muted-foreground text-sm">
-          software engineer | hobbyist photographer 
+          new grad | software engineer | hobbyist photographer
         </p>
       </div>
       <div class="pt-0">
-        <p class="text-md">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget elit velit. Morbi est ligula, tempor rutrum dolor in, congue pretium augue. Fusce finibus dignissim leo in sodales. Cras aliquet dui tortor. Aenean vestibulum commodo ligula, et convallis augue pellentesque sodales. Ut ante augue, faucibus vitae dictum nec, rutrum quis tellus. Ut ornare vel justo et sagittis. Donec pretium leo massa, a scelerisque nulla malesuada ac.
-          Aliquam sit amet nisi sed ex convallis finibus.
+        <p class="text-md  mt-4">Hello and welcome to my corner of the web!</p>
+        <p class="text-md  mt-4">
+          My name is Allan. I finished my Master's in Computer Science and
+          Engineering at Técnico Lisboa in late 2025, following my Bachelor's
+          degree in early 2023. I was recently a Backend Software Engineer
+          Intern at Unbabel, where I handled language pipelines and data
+          integrity. Before that, I worked as an SRE Intern at Sky Portugal,
+          focusing on the observability of digital certificates. I also contributed to the 
+          multimedia production for SINFO (30th edition), the largest student-run tech
+          event in Portugal.
         </p>
+
+        <p class="text-md  mt-4">
+        
+          Beyond the monitor, I walk. I walk for the distance, I walk for the
+          shot, I walk for the lack of aim, and I walk for the sake of it.
+        </p>
+
         <p class="text-md mt-4">
-           Nam id mi quis libero egestas porta et nec sem. Cras diam felis, luctus euismod augue nec, placerat luctus magna. 
-          <Link
-          href="/about"
-          class="text-foreground"
-          underline>about</Link
-        > placerat luctus magna. <Link
-        href="/projects"
-        class="text-foreground"
-        underline>projects</Link 
-      > Donec id aliquet libero. Nunc sed felis quis nisi aliquet iaculis.
+          See the full story in <Link
+            href="/about"
+            class="text-foreground"
+            underline>about</Link
+          >
+          , explore my work in <Link
+            href="/projects"
+            class="text-foreground"
+            underline>projects</Link
+          >, and find life beyond the monitor in the <Link
+            href="/gallery"
+            class="text-foreground"
+            underline>gallery</Link
+          >.
+        </p>
       </div>
     </div>
-  </section>
-  <section class="flex flex-col gap-y-4 mt-4 lg:mt-0">
-    <h2 class="text-2xl font-cooper ">Latest posts</h2>
-    <ul class="flex flex-col gap-y-4">
-      {
-        blog.map((post) => (
-          <li>
-            <BlogCard entry={post} />
-          </li>
-        ))
-      }
-    </ul>
-    <div class="flex justify-center">
-      <Link
-        href="/blog"
-        class={buttonVariants({ variant: 'ghost' }) + ' group'}
-      >
-        See all posts <span
-          class="ml-1.5 transition-transform group-hover:translate-x-1"
-          >&rarr;</span
+    <section class="mt-4 flex flex-col gap-y-4 lg:mt-0">
+      <h2 class="font-cooper text-2xl">Latest posts</h2>
+      <ul class="flex flex-col gap-y-4">
+        {
+          blog.map((post) => (
+            <li>
+              <BlogCard entry={post} />
+            </li>
+          ))
+        }
+      </ul>
+      <div class="flex justify-center">
+        <Link
+          href="/blog"
+          class={buttonVariants({ variant: 'ghost' }) + ' group'}
         >
-      </Link>
-    </div>
+          See all posts <span
+            class="ml-1.5 transition-transform group-hover:translate-x-1"
+            >&rarr;</span
+          >
+        </Link>
+      </div>
+    </section>
   </section>
 </Layout>
