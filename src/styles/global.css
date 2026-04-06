@@ -190,18 +190,4 @@
     content: "";
     background-position: center top;
   }
-
-  body::before {
-    background-image: url("/assets/speckles-blue.svg ");
-
-    
-  }
-
-  body[data-color="blue"]::after {
-    background-image: url("/assets/speckles-blue.svg");
-  }
-
-  [data-theme='dark'] body::before {
-    filter: invert(1);
-  }
 }
