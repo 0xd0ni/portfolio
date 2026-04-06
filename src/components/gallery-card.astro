@@ -1,4 +1,4 @@
-120---
+---
 import Link from '@/components/link.astro'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
@@ -24,7 +24,7 @@ const { album } = Astro.props
     href={`/gallery/${album.name}`}
     class="flex h-full flex-col justify-start"
   >
-    <div class="w-full h-48 border-b border-foreground pb-0">
+    <div class="border-foreground h-48 w-full border-b pb-0">
       <Image
         src={album.cover}
         alt={album.coverAlt}
@@ -32,15 +32,13 @@ const { album } = Astro.props
         width="768"
         height="480"
         class:list={[
-          "object-cover h-full w-full object-center",
-          "group-hover:shadow-lg group-hover:opacity-90"
+          'h-full w-full object-cover object-center',
+          'group-hover:opacity-90 group-hover:shadow-lg',
         ]}
-        />
+      />
     </div>
-    <div class="p-2 bg-destructive text-foreground">
-      <div
-      class="mb-2 flex flex-wrap gap-x-2 items-center justify-between"
-    >
+    <div class="bg-gallery-card text-foreground p-2">
+      <div class="mb-2 flex flex-wrap items-center justify-between gap-x-2">
         <h3 class="text-xl font-medium capitalize">
           {album.name}
         </h3>

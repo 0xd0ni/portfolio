@@ -6,8 +6,7 @@
   --font-sans:
     Outfit, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-cooper:
-    CooperHewitt Medium;
+  --font-cooper: CooperHewitt Medium;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -21,10 +20,12 @@
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
 
+  --color-gallery-card: var(--gallery-card);
+  --color-gallery-card-foreground: var(--gallery-card-foreground);
+
   --color-border: var(--border);
   --color-ring: var(--ring);
 }
-
 @font-face {
   font-family: 'CooperHewitt';
   src: url('/fonts/cooperhewitt-webfonts/CooperHewitt-Book.woff') format('woff');
@@ -114,13 +115,14 @@
 }
 
 :root {
-  --background: oklch(1,1,1);
+  --background: oklch(1, 1, 1);
   --foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --destructive: oklch(0.577 0.245 27.325);
+  --gallery-card: oklch(0.7341 0.1794 56.11);
   --border: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
 }
@@ -133,6 +135,7 @@
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+  --gallery-card: oklch(0.7341 0.1794 56.11);
   --border: oklch(1 0 0 / 10%);
   --ring: oklch(0.556 0 0);
 }
@@ -147,9 +150,10 @@
   border-right: 0px;
 }
 
-.card-offset::after,.card-offset::before {
+.card-offset::after,
+.card-offset::before {
   position: absolute;
-  content: "";
+  content: '';
   width: var(--width);
   height: calc(100% + 20px);
   top: var(--offset);
@@ -187,10 +191,10 @@
     inset: 0;
     z-index: 10;
     pointer-events: none;
-    content: "";
+    content: '';
     background-position: center top;
   }
-/* 
+  /* 
   body::before {
     background-image: url("/assets/speckles-blue.svg ");
     
