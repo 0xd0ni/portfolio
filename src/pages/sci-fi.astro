@@ -1,0 +1,25 @@
+---
+import Breadcrumbs from '@/components/breadcrumbs.astro'
+import Callout from '@/components/callout.astro'
+import PageHead from '@/components/page-head.astro'
+import Layout from '@/layouts/layout.astro'
+import { getAllProjects } from '@/lib/data-utils'
+
+const projects = await getAllProjects()
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="Sci-fi" />
+  <Breadcrumbs items={[{ label: 'Sci-fi', icon: 'lucide:book-open-text' }]} />
+
+  <section>
+    <div class="min-w-full"></div>
+    <Callout variant="warning">
+      <span class="text-base"
+        >Passive black holes of information, active predatory infovores,
+        unrememberable worms which covered the human skin like dust mites...
+        contagious bad news, self-sealing secrets, living murders, Chinatowns.</span
+      >
+    </Callout>
+  </section>
+</Layout>

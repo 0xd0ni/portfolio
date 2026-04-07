@@ -15,30 +15,55 @@ const projects = await getAllProjects()
 
   <section>
     <div class="min-w-full">
-      <div class="prose mb-8">
+      <h1 class="font-cooper m-0 text-2xl font-black">About</h1>
+      <div class="prose [&_p]:text-foreground mb-8">
         <p class="mt-0">
-          astro-erudite is an opinionated, unstyled static blogging template
-          that prioritizes simplicity and performance, built with <Link
-            href="https://astro.build"
-            external
-            underline>Astro</Link
-          >, <Link href="https://tailwindcss.com" external underline
-            >Tailwind</Link
-          >, and <Link href="https://ui.shadcn.com" external underline
-            >shadcn/ui</Link
-          >. It provides a clean foundation for your content while being
-          extremely easy to customize.
+          When I was a kid, I'd spend hours going down Wikipedia <Link
+            href="https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_scops_owl"
+            >rabbit holes</Link
+          > and tinkering with whatever I could get running on the family desktop.
+          Mostly games.
         </p>
+
         <p>
-          To learn more about the philosophy behind this template, check out the
-          following blog post: <Link
-            href="/blog/the-state-of-static-blogs"
-            underline>The State of Static Blogs in 2024</Link
-          >.
+          Then, during my final year of secondary school, I took Aplicações
+          Informáticas B. That's where I wrote my first real program: a
+          calculator in Pascal. Yes, Pascal. And not that long ago either. I
+          still have the code on a random SSD somewhere. I also dabbled in
+          Visual Basic around the same time.
+        </p>
+
+        <p>
+          University followed. Computer Science and Engineering. Somewhere along
+          the way, I noticed I'd lose track of time debugging something that
+          wouldn't give. That's what drew me toward backend engineering and
+          distributed systems.
+        </p>
+
+        <p>
+          I'm especially interested in backend engineering and how systems
+          evolve at scale: the architecture decisions, the tradeoffs, the things
+          that only reveal themselves under load. I'm also drawn to the human
+          side of computing, particularly human-computer interaction and
+          information visualization. My Master's thesis was on LLMs and HCI,
+          exploring how interactive, non-linear interfaces can enhance the
+          reliability of large language models by linking them to external
+          knowledge sources. I also care about self-hosting, data ownership, and
+          free and open source software.
+        </p>
+
+        <p>
+          I'm always open to a chat over coffee or tea, about systems, <Link
+            href="/sci-fi"
+            class="text-foreground"
+            underline>sci-fi</Link
+          >,or photography. <Link
+            href={`mailto:${import.meta.env.PUBLIC_EMAIL}`}>Say hello.</Link
+          >
         </p>
       </div>
 
-      <h2 class="mb-4 text-2xl font-medium">Example Projects Listing</h2>
+      <h2 id="projects" class="mb-4 text-2xl font-medium">Projects</h2>
       <div class="flex flex-col gap-4">
         {projects.map((project) => <ProjectCard project={project} />)}
       </div>
