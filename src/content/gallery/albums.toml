@@ -1,1 +1,23 @@
-albums = [ "madrid", "barcelona", "valencia", "lisboa", "sintra", "sines"]
+[[albums]]
+name = "madrid"
+pubDate = "2025-08-18"
+
+[[albums]]
+name = "barcelona"
+pubDate = "2024-12-14"
+
+[[albums]]
+name = "valencia"
+pubDate = "2024-12-18"
+
+[[albums]]
+name = "lisboa"
+pubDate = "2023-08-20"
+
+# [[albums]]
+# name = "sintra"
+# pubDate = "2024-06-20"
+
+# [[albums]]
+# name = "sines"
+# pubDate = "2024-06-20"

@@ -1,16 +1,18 @@
 ---
 import Breadcrumbs from '@/components/breadcrumbs.astro'
 import GalleryCard from '@/components/gallery-card.astro'
+import Link from '@/components/link.astro'
 import PageHead from '@/components/page-head.astro'
 import Layout from '@/layouts/layout.astro'
+import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content'
 
 const entries = await getCollection('albums')
 
-// Group entries by album name, pick a random cover from each
+// Group entries by album name
 const albumMap = new Map<string, typeof entries>()
 for (const entry of entries) {
-  const name = entry.data.album
+  const { album: name } = entry.data
   if (!albumMap.has(name)) albumMap.set(name, [])
   albumMap.get(name)!.push(entry)
 }
@@ -27,6 +29,8 @@ const albums = [...albumMap.entries()]
     }
   })
   .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
+
+const selfPortrait = `${import.meta.env.SELF_PORTRAIT}`
 ---
 
 <Layout class="max-w-3xl">
@@ -35,12 +39,29 @@ const albums = [...albumMap.entries()]
 
   <section>
     <div class="prose mb-8">
-      <h3 class="text-2xl  mt-0 lg:mt-4 leading-none font-medium">photo & film dude</h3>
-      <!-- <h3 class="mt-100 text-2xl leading-none font-medium lg:mt-4">photo & film dude</h3> -->
-      <p class="mb-4">
-        TODO
-      </p>
-      <div class="grid lg:grid-cols-2 gap-4">
+      <h1 class="font-cooper m-0 text-2xl font-black">photo & film dude</h1>
+      That's me with the first camera I ever picked up, a <Link
+        href="https://www.dpreview.com/articles/8401177820/panals80"
+        external>Panasonic Lumix DMC-LS80</Link
+      > that belonged to my family.Then came the smartphones, Windows Phone, ZTE,
+      whatever I had at the time. Around 2020 I bought a DSLR, which I still shoot
+      with. Most recently a Pentax 17, my first film camera. I <Link
+        href="https://www.youtube.com/watch?v=zI1eLwVuSeI"
+        external>can't get enough</Link
+      > of it.
+      <div
+        class="border-foreground mx-auto my-6 h-48 w-48 overflow-hidden border"
+      >
+        <Image
+          src={selfPortrait}
+          alt={'self portrait'}
+          quality="high"
+          width="192"
+          height="192"
+          class="h-full w-full object-cover object-center"
+        />
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2">
         {albums.map((album) => <GalleryCard album={album} />)}
       </div>
     </div>

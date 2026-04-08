@@ -3,7 +3,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 'doni at interweb',
   description:
-    'fragments of ideas, stills, and moments I find worth keeping. A mix of visual work, experiments, and software projects that reflect how I think and build. My name\'s Allan aka doni',
+    "fragments of ideas, stills, and moments I find worth keeping. A mix of visual work, experiments, and software projects that reflect how I think and build. My name's Allan aka doni",
   href: 'https://doniatinterweb.pages.dev',
   author: 'doni',
   locale: 'en-US',
@@ -22,13 +22,12 @@ export const NAV_LINKS: SocialLink[] = [
   },
   {
     href: '/gallery',
-    label: 'gallery'
+    label: 'gallery',
   },
   {
     href: '/uses',
-    label: 'uses'
-  }
-  
+    label: 'uses',
+  },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [

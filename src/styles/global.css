@@ -36,7 +36,8 @@
 
 @font-face {
   font-family: 'CooperHewitt Medium';
-  src: url('/fonts/cooperhewitt-webfonts/CooperHewitt-Medium.woff') format('woff2-variations');
+  src: url('/fonts/cooperhewitt-webfonts/CooperHewitt-Medium.woff')
+    format('woff2-variations');
   font-weight: 100 900;
   font-style: medium;
   font-display: swap;
@@ -194,17 +195,4 @@
     content: '';
     background-position: center top;
   }
-  /* 
-  body::before {
-    background-image: url("/assets/speckles-blue.svg ");
-    
-  }
-
-  body[data-color="blue"]::after {
-    background-image: url("/assets/speckles-blue.svg");
-  }
-
-  [data-theme='dark'] body::before {
-    filter: invert(1);
-  } */
 }

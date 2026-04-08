@@ -1,5 +1,16 @@
 import type { Loader } from 'astro/loaders'
+import { readFileSync } from 'node:fs'
+import { parse } from 'smol-toml'
 import { r2 } from '@/lib/r2'
+
+const { albums: albumEntries } = parse(
+  readFileSync('./src/content/gallery/albums.toml', 'utf-8'),
+) as { albums: { name: string; pubDate: string }[] }
+
+// album dates are defined in toml
+const albumDates: Record<string, Date> = Object.fromEntries(
+  albumEntries.map((a) => [a.name, new Date(a.pubDate)]),
+)
 
 export function r2Loader(prefixes: string | string[]): Loader {
   const prefixList = Array.isArray(prefixes) ? prefixes : [prefixes]
@@ -11,7 +22,6 @@ export function r2Loader(prefixes: string | string[]): Loader {
 
       for (const prefix of prefixList) {
         logger.info(`Fetching images from R2 with prefix: ${prefix}`)
-
         let continuationToken: string | undefined
 
         do {
@@ -33,7 +43,7 @@ export function r2Loader(prefixes: string | string[]): Loader {
                 description: `Image from ${prefix}`,
                 cover: publicUrl,
                 coverAlt: title,
-                pubDate: obj.lastModified ?? new Date(),
+                pubDate: albumDates[prefix] ?? obj.lastModified ?? new Date(),
               },
             })
 

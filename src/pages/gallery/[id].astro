@@ -10,9 +10,9 @@ import { parse } from 'smol-toml'
 export async function getStaticPaths() {
   const { albums } = parse(
     readFileSync('./src/content/gallery/albums.toml', 'utf-8'),
-  ) as { albums: string[] }
+  ) as { albums: { name: string; pubDate: string }[] }
 
-  return albums.map((id) => ({ params: { id } }))
+  return albums.map(({ name }) => ({ params: { id: name } }))
 }
 
 const { id } = Astro.params
@@ -56,5 +56,3 @@ const images = await getAlbumImages(id)
     </section>
   </div>
 </GalleryLayout>
-
-
