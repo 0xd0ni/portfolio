@@ -1,0 +1,35 @@
+---
+import '@/styles/global.css'
+import '@/styles/typography.css'
+
+import Footer from '@/components/footer.astro'
+import Head from '@/components/head.astro'
+import Header from '@/components/header.astro'
+import { SITE } from '@/consts'
+import { cn } from '@/lib/utils'
+
+const { isWide = false } = Astro.props
+---
+
+<!doctype html>
+<html
+  class="bg-background text-foreground scheme-light-dark"
+  lang={SITE.locale}
+>
+  <Head>
+    <slot name="head" />
+  </Head>
+  <body>
+    <div class="flex h-fit min-h-screen flex-col">
+      <Header />
+      <main class="grow">
+        <div
+          class={cn('mx-auto flex grow flex-col px-4', !isWide && 'max-w-3xl')}
+        >
+          <slot />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+---
+import Link from '@/components/link.astro'
+import { formatDate } from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+
+interface Props {
+  album: {
+    name: string
+    cover: string
+    coverAlt: string
+    count: number
+    pubDate: Date
+  }
+}
+
+const { album } = Astro.props
+---
+
+<div
+  class="bg-destructive text-secondary-foreground border-foreground hover:bg-secondary/50 border transition-colors duration-300 ease-in-out sm:h-auto lg:h-full"
+>
+  <Link
+    href={`/gallery/${album.name}`}
+    class="flex h-full flex-col justify-start"
+  >
+    <div class="border-foreground h-48 w-full border-b pb-0">
+      <Image
+        src={album.cover}
+        alt={album.coverAlt}
+        quality="mid"
+        width="768"
+        height="480"
+        class:list={[
+          'h-full w-full object-cover object-center',
+          'group-hover:opacity-90 group-hover:shadow-lg',
+        ]}
+      />
+    </div>
+    <div class="bg-gallery-card text-foreground p-2">
+      <div class="mb-2 flex flex-wrap items-center justify-between gap-x-2">
+        <h3 class="text-xl font-medium capitalize">
+          {album.name}
+        </h3>
+        <p class="flex gap-x-1.5 px-1 text-sm">
+          <span class="flex items-center gap-x-1.5">
+            <Icon name="lucide:calendar" class="size-4" />
+            <span>{formatDate(album.pubDate)}</span>
+          </span>
+        </p>
+      </div>
+      <p class="mt-4 mb-2 text-sm">
+        {album.count} photo{album.count !== 1 ? 's' : ''}
+      </p>
+    </div>
+  </Link>
+</div>
