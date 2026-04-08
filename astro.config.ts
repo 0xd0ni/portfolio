@@ -106,7 +106,7 @@ export default defineConfig({
   },
   image: {
     // note that: domain expect hostnames, not full URLs
-    domains: [ "astro.build",`${process.env.R2_DOMAIN}`],
+    domains: ['astro.build', `${process.env.R2_DOMAIN}`],
     remotePatterns: [{ protocol: 'https' }],
     layout: 'constrained',
     responsiveStyles: true,

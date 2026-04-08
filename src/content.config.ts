@@ -5,9 +5,11 @@ import { r2Loader } from '@/content/config'
 import { z } from 'astro/zod'
 import { parse } from 'smol-toml'
 
-const { albums: albumPrefixes } = parse(
+const { albums: albumEntries } = parse(
   readFileSync('./src/content/gallery/albums.toml', 'utf-8'),
-) as { albums: string[] }
+) as { albums: { name: string; pubDate: string }[] }
+
+const albumPrefixes = albumEntries.map((a) => a.name)
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
