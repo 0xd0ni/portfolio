@@ -61,6 +61,19 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
             underline>gallery</Link
           >.
         </p>
+        <div class="mt-4 flex flex-wrap items-center justify-start gap-3">
+          <Link
+            href=`${import.meta.env.RESUME}`
+            external
+            class={buttonVariants({ variant: 'outline' }) +
+              ' group text-highlight-foreground border-highlight-foreground sm:text-foreground sm:border-border sm:hover:text-highlight-foreground sm:hover:border-highlight-foreground'}
+          >
+            résumé <span
+              class="ml-1.5 transition-transform group-hover:translate-x-1"
+              >&rarr;</span
+            >
+          </Link>
+        </div>
       </div>
     </div>
     <section class="mt-4 flex flex-col gap-y-4 lg:mt-4">
