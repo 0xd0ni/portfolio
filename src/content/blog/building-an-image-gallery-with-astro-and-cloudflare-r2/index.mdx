@@ -1,0 +1,17 @@
+---
+title: 'Building an Image Gallery with Astro and Cloudflare R2'
+description: "Who needs a backend? Cloudflare R2 + Astro's Content Layer is all the infrastructure your image gallery will ever need."
+date: 2026-04-09
+tags: ['v1.0.0']
+image: ''
+authors: ['allan']
+---
+
+import Callout from '@/components/callout.astro'
+import { Image } from 'astro:assets'
+
+<Callout title="" variant="important">
+  ## let him cook!
+  <Image src={import.meta.env.BLOG_LET_ALLAN_COOK} alt="..." inferSize />
+
+</Callout>
