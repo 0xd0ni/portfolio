@@ -1,9 +1,9 @@
 ---
 import Link from '@/components/link.astro'
-import { Badge } from '@/components/ui/badge'
+import { buttonVariants } from '@/components/ui/button'
+import { ICON_MAP, getIconColor, getIconName } from '@/consts'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 
 interface Props {
@@ -14,44 +14,23 @@ const { project } = Astro.props
 ---
 
 <div
-  class="hover:bg-muted/50 rounded-xl border p-4 transition-colors duration-300 ease-in-out"
+  class="border-highlight-foreground sm:border-border sm:hover:border-highlight-foreground flex scroll-mt-20 flex-col overflow-hidden rounded-xl border transition-colors duration-200"
 >
-  <Link
-    href={project.data.link}
-    class="flex flex-col gap-4 sm:flex-row"
-    external
-  >
-    {
-      project.data.image && (
-        <div class="w-full sm:max-w-3xs sm:shrink-0">
-          <Image
-            src={project.data.image}
-            alt={project.data.name}
-            width={1200}
-            height={630}
-            class="object-cover"
-          />
-        </div>
-      )
-    }
-    <div class="grow">
-      <h3 class="mb-1 text-lg font-medium">
-        {project.data.name}
-      </h3>
+  <div class="flex grow flex-col gap-4 p-4">
+    <div>
+      <h3 class="mb-1 text-xl font-bold">{project.data.name}</h3>
       <p class="text-muted-foreground mb-2 text-sm">
         {project.data.description}
       </p>
       {
         project.data.startDate && (
           <p class="text-muted-foreground/70 mb-2 flex items-center gap-x-1.5 text-xs">
-            <span class="flex items-center gap-x-1.5">
-              <Icon name="lucide:calendar" class="size-3" />
-              <span>
-                {formatDate(project.data.startDate)}
-                {project.data.endDate
-                  ? ` → ${formatDate(project.data.endDate)}`
-                  : ' → Present'}
-              </span>
+            <Icon name="lucide:calendar" class="size-3" />
+            <span>
+              {formatDate(project.data.startDate)}
+              {project.data.endDate
+                ? ` → ${formatDate(project.data.endDate)}`
+                : ' → Present'}
             </span>
           </p>
         )
@@ -59,12 +38,61 @@ const { project } = Astro.props
       {
         project.data.tags && (
           <div class="flex flex-wrap gap-2">
-            {project.data.tags.map((tag: string) => (
-              <Badge variant="muted">{tag}</Badge>
-            ))}
+            {project.data.tags.map((tag: string) => {
+              const icon = ICON_MAP[tag as keyof typeof ICON_MAP]
+              return (
+                <span class="text-muted-foreground bg-muted/30 flex items-center gap-1.5 rounded-sm px-1.5 py-0.5 text-xs">
+                  <Icon
+                    name={getIconName(icon) ?? 'lucide:code'}
+                    class="size-2.5"
+                    style={
+                      getIconColor(icon)
+                        ? `color: ${getIconColor(icon)}`
+                        : undefined
+                    }
+                  />
+                  {tag}
+                </span>
+              )
+            })}
           </div>
         )
       }
     </div>
-  </Link>
+    {
+      (project.data.link ||
+        project.data.watchDemoLink ||
+        project.data.readLink) && (
+        <div class="mt-auto flex flex-wrap gap-2 border-t pt-4">
+          {project.data.link && (
+            <Link
+              href={project.data.link}
+              external
+              class={buttonVariants({ variant: 'link', size: 'sm' })}
+            >
+              source code <Icon name="lucide:arrow-right" />
+            </Link>
+          )}
+          {project.data.watchDemoLink && (
+            <Link
+              href={project.data.watchDemoLink}
+              external
+              class={buttonVariants({ variant: 'link', size: 'sm' })}
+            >
+              <Icon name="lucide:play" /> watch demo
+            </Link>
+          )}
+          {project.data.readLink && (
+            <Link
+              href={project.data.readLink}
+              external
+              class={buttonVariants({ variant: 'link', size: 'sm' })}
+            >
+              <Icon name="lucide:book-open" /> read paper
+            </Link>
+          )}
+        </div>
+      )
+    }
+  </div>
 </div>

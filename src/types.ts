@@ -8,11 +8,13 @@ export type Site = {
   postsPerPage: number
 }
 
+export type IconDef = string | { icon: string; color: string }
+
 export type SocialLink = {
   href: string
   label: string
 }
 
 export type IconMap = {
-  [key: string]: string
+  [key: string]: IconDef
 }
