@@ -66,9 +66,15 @@ const projects = await getAllProjects()
       </div>
 
       <h2 id="projects" class="mb-4 text-2xl font-medium">Projects</h2>
-      <div class="flex flex-col gap-4">
-        {projects.map((project) => <ProjectCard project={project} />)}
-      </div>
+      <ul class="flex flex-col gap-y-4">
+        {
+          projects.map((project) => (
+            <li>
+              <ProjectCard project={project} />
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 </Layout>

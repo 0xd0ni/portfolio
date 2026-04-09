@@ -19,7 +19,7 @@
 
   --color-destructive: var(--destructive);
 
-  --color-gallery-card: var(--gallery-card);
+  --color-card: var(--card);
   --color-highlight-foreground: var(--highlight-foreground);
 
   --color-border: var(--border);
@@ -122,7 +122,7 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --gallery-card: oklch(0.7341 0.1794 56.11);
+  --card: oklch(0.7341 0.1794 56.11);
   --highlight-foreground: oklch(0.145 0 0);
   --border: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -136,7 +136,7 @@
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --gallery-card: oklch(0.7341 0.1794 56.11);
+  --card: oklch(0.7341 0.1794 56.11);
   --highlight-foreground: oklch(0.7341 0.1794 56.11);
   --border: oklch(1 0 0 / 10%);
   --ring: oklch(0.556 0 0);
