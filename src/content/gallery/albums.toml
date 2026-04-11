@@ -14,6 +14,10 @@ pubDate = "2024-12-18"
 name = "lisboa"
 pubDate = "2023-08-20"
 
+[[albums]]
+name = "cacilhas"
+pubDate = "2023-07-09"
+
 # [[albums]]
 # name = "sintra"
 # pubDate = "2024-06-20"
