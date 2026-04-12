@@ -24,7 +24,7 @@ const { project } = Astro.props
       </p>
       {
         project.data.startDate && (
-          <p class="text-muted-foreground/70 mb-2 flex items-center gap-x-1.5 text-xs">
+          <p class="text-muted-foreground mb-2 flex items-center gap-x-1.5 text-xs">
             <Icon name="lucide:calendar" class="size-3" />
             <span>
               {formatDate(project.data.startDate)}
