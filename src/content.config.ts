@@ -35,26 +35,23 @@ const authors = defineCollection({
     bio: z.string().optional(),
     mail: z.email().optional(),
     website: z.url().optional(),
-    twitter: z.url().optional(),
     github: z.url().optional(),
     linkedin: z.url().optional(),
-    discord: z.url().optional(),
   }),
 })
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      description: z.string(),
-      tags: z.array(z.string()),
-      link: z.url().optional(),
-      watchDemoLink: z.url().optional(),
-      readLink: z.url().optional(),
-      startDate: z.coerce.date().optional(),
-      endDate: z.coerce.date().optional(),
-    }),
+  schema: z.object({
+    name: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()),
+    link: z.url().optional(),
+    watchDemoLink: z.url().optional(),
+    readLink: z.url().optional(),
+    startDate: z.coerce.date().optional(),
+    endDate: z.coerce.date().optional(),
+  }),
 })
 
 const albums = defineCollection({
