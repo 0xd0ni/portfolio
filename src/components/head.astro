@@ -45,5 +45,18 @@ import { ClientRouter } from 'astro:transitions'
   <Favicons />
   <ClientRouter />
 
+  <script is:inline>
+    ;(() => {
+      const stored = localStorage?.getItem('theme') ?? ''
+      const theme = ['dark', 'light'].includes(stored)
+        ? stored
+        : window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+      document.documentElement.setAttribute('data-theme', theme)
+      localStorage.setItem('theme', theme)
+    })()
+  </script>
+
   <slot />
 </head>
