@@ -1,26 +1,36 @@
 ---
+import { distributeIntoColumns } from '@/lib/layout'
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
 import { Image } from 'astro:assets'
 
-interface Props {
-  images: string[]
+type ColumnCount = 1 | 2 | 3 | 4 | 5
+
+const GRID_COLS: Record<ColumnCount, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 md:grid-cols-2',
+  3: 'grid-cols-1 md:grid-cols-3',
+  4: 'grid-cols-1 md:grid-cols-4',
+  5: 'grid-cols-1 md:grid-cols-5',
 }
 
-const { images } = Astro.props
+interface Props {
+  photos: string[]
+  columnCount?: ColumnCount
+}
 
-// Distribute images across 3 columns by index to
-// create a masonry-style layout
-const col1 = images.filter((_, i) => i % 3 === 0)
-const col2 = images.filter((_, i) => i % 3 === 1)
-const col3 = images.filter((_, i) => i % 3 === 2)
+const { photos, columnCount = 3 } = Astro.props
+const columns = distributeIntoColumns(photos, columnCount)
 ---
 
 <div
   id="gallery"
-  class="container mx-auto grid grid-cols-1 gap-4 pb-2 md:grid-cols-3 md:gap-2"
+  class:list={[
+    'container mx-auto grid gap-4 pb-2 md:gap-2',
+    GRID_COLS[columnCount],
+  ]}
 >
   {
-    [col1, col2, col3].map((col) => (
+    columns.map((col) => (
       <div class="grid h-full grid-cols-1 gap-4 lg:gap-2">
         {col.map((src) => (
           <a

@@ -1,19 +1,16 @@
 [[albums]]
 name = "madrid"
 pubDate = "2025-08-18"
-
-[[albums]]
-name = "barcelona"
-pubDate = "2024-12-14"
-
-[[albums]]
-name = "valencia"
-pubDate = "2024-12-18"
+cover = "22"
 
 [[albums]]
 name = "lisboa"
 pubDate = "2023-08-20"
+cover = "1"
 
 [[albums]]
 name = "cacilhas"
 pubDate = "2023-07-09"
+cover = "5"
+
+

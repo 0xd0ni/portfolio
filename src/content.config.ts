@@ -1,16 +1,10 @@
-import { readFileSync } from 'node:fs'
 import { glob } from 'astro/loaders'
 import { defineCollection } from 'astro:content'
 import { r2Loader } from '@/content/config'
+import { readAlbumsMeta } from '@/lib/albums'
 import { z } from 'astro/zod'
-import { parse } from 'smol-toml'
 
-const { albums: albumEntries } = parse(
-  readFileSync('./src/content/gallery/albums.toml', 'utf-8'),
-) as { albums: { name: string; pubDate: string }[] }
-
-const albumPrefixes = albumEntries.map((a) => a.name)
-
+const albumEntries = readAlbumsMeta()
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: ({ image }) =>
@@ -48,6 +42,7 @@ const projects = defineCollection({
     tags: z.array(z.string()),
     link: z.url().optional(),
     watchDemoLink: z.url().optional(),
+    seeDemoLink: z.url().optional(),
     readLink: z.url().optional(),
     startDate: z.coerce.date().optional(),
     endDate: z.coerce.date().optional(),
@@ -55,7 +50,7 @@ const projects = defineCollection({
 })
 
 const albums = defineCollection({
-  loader: r2Loader(albumPrefixes),
+  loader: r2Loader(albumEntries),
   schema: z.object({
     title: z.string(),
     album: z.string(),

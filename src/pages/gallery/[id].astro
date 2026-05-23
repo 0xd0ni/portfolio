@@ -1,26 +1,20 @@
 ---
 import Breadcrumbs from '@/components/breadcrumbs.astro'
 import FancyBox from '@/components/fancybox.astro'
-import GalleryLayout from '@/layouts/gallery.astro'
+import Layout from '@/layouts/layout.astro'
 
-import { getAlbumImages } from '@/lib/data-utils'
-import { readFileSync } from 'node:fs'
-import { parse } from 'smol-toml'
+import { CONTAINER, INSTAGRAM_HREF } from '@/consts'
+import { getAlbumPaths } from '@/lib/albums'
 
 export async function getStaticPaths() {
-  const { albums } = parse(
-    readFileSync('./src/content/gallery/albums.toml', 'utf-8'),
-  ) as { albums: { name: string; pubDate: string }[] }
-
-  return albums.map(({ name }) => ({ params: { id: name } }))
+  return getAlbumPaths()
 }
 
 const { id } = Astro.params
-
-const images = await getAlbumImages(id)
+const { photos } = Astro.props
 ---
 
-<GalleryLayout>
+<Layout class={CONTAINER} instagramHref={INSTAGRAM_HREF}>
   <div class="col-start-2">
     <Breadcrumbs
       items={[
@@ -52,7 +46,7 @@ const images = await getAlbumImages(id)
       </div>
     </section>
     <section class="mt-4">
-      <FancyBox images={images} />
+      <FancyBox photos={photos} />
     </section>
   </div>
-</GalleryLayout>
+</Layout>

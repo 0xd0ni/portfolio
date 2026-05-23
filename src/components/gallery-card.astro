@@ -1,17 +1,12 @@
 ---
 import Link from '@/components/link.astro'
+import type { Album } from '@/lib/albums'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 
 interface Props {
-  album: {
-    name: string
-    cover: string
-    coverAlt: string
-    count: number
-    pubDate: Date
-  }
+  album: Album
 }
 
 const { album } = Astro.props
@@ -20,7 +15,10 @@ const { album } = Astro.props
 <div
   class="border-foreground hover:bg-secondary/50 bg-destructive text-secondary-foreground border transition-colors duration-300 ease-in-out sm:h-auto lg:h-full"
 >
-  <Link href={`/${album.name}`} class="flex h-full flex-col justify-start">
+  <Link
+    href={`/gallery/${album.name}`}
+    class="flex h-full flex-col justify-start"
+  >
     <div class="h-48 w-full">
       <Image
         src={album.cover}

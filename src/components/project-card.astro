@@ -62,6 +62,7 @@ const { project } = Astro.props
     {
       (project.data.link ||
         project.data.watchDemoLink ||
+        project.data.seeDemoLink ||
         project.data.readLink) && (
         <div class="mt-auto flex flex-wrap gap-2 border-t pt-4">
           {project.data.link && (
@@ -80,6 +81,15 @@ const { project } = Astro.props
               class={buttonVariants({ variant: 'link', size: 'sm' })}
             >
               <Icon name="lucide:play" /> watch demo
+            </Link>
+          )}
+          {project.data.seeDemoLink && (
+            <Link
+              href={project.data.seeDemoLink}
+              external
+              class={buttonVariants({ variant: 'link', size: 'sm' })}
+            >
+              <Icon name="lucide:monitor" /> see demo
             </Link>
           )}
           {project.data.readLink && (

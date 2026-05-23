@@ -48,14 +48,27 @@ import { ClientRouter } from 'astro:transitions'
   <script is:inline>
     ;(() => {
       const stored = localStorage?.getItem('theme') ?? ''
-      const theme = ['dark', 'light'].includes(stored)
-        ? stored
-        : window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light'
+      const theme =
+        stored === 'dark' || stored === 'light'
+          ? stored
+          : window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
       document.documentElement.setAttribute('data-theme', theme)
       localStorage.setItem('theme', theme)
     })()
+  </script>
+  <script>
+    document.addEventListener('astro:after-swap', () => {
+      const stored = localStorage.getItem('theme') ?? ''
+      const theme =
+        stored === 'dark' || stored === 'light'
+          ? stored
+          : window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
+      document.documentElement.setAttribute('data-theme', theme)
+    })
   </script>
 
   <slot />

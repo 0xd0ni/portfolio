@@ -3,8 +3,8 @@ import type { IconDef, IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 'doni at interweb',
   description:
-    "fragments of ideas, stills, and moments I find worth keeping. A mix of visual work, experiments, and software projects that reflect how I think and build. My name's Allan aka doni",
-  href: 'https://doniatinterweb.pages.dev',
+    "A mix of visual work, experiments, and software projects that reflect how I think and build. My name's Allan aka doni",
+  href: 'https://doniatinterweb.xyz/',
   author: 'doni',
   locale: 'en-US',
   featuredPostCount: 2,
@@ -56,6 +56,7 @@ export const ICON_MAP: IconMap = {
   LinkedIn: 'lucide:linkedin',
   Email: 'lucide:mail',
   RSS: 'lucide:rss',
+  Instagram: 'simple-icons:instagram',
 
   // languages
   c: { icon: 'simple-icons:c', color: '#A8B9CC' },
@@ -71,6 +72,7 @@ export const ICON_MAP: IconMap = {
   // frameworks & libraries
   astro: { icon: 'simple-icons:astro', color: '#FF5D01' },
   'elk.js': { icon: 'lucide:network', color: '#888888' },
+  fancybox: { icon: 'lucide:image', color: '#888888' },
   fastapi: { icon: 'simple-icons:fastapi', color: '#009688' },
   gson: { icon: 'simple-icons:google', color: '#4285F4' },
   maven: { icon: 'simple-icons:apachemaven', color: '#C71A36' },
@@ -101,3 +103,7 @@ export function getIconColor(icon: IconDef | undefined): string | undefined {
   if (!icon || typeof icon === 'string') return undefined
   return icon.color
 }
+
+export const CONTAINER = 'max-w-3xl'
+
+export const INSTAGRAM_HREF = `https://www.instagram.com/${import.meta.env.PUBLIC_INSTAGRAM}`

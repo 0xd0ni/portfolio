@@ -4,13 +4,6 @@ import { AwsClient } from 'aws4fetch'
 // gets initialized on first use
 let _client: AwsClient | undefined
 function getClient() {
-  // if (_client == null) {
-  //   _client = new AwsClient({
-  //     accessKeyId: import.meta.env.R2_ACCESS_KEY_ID as string,
-  //     secretAccessKey: import.meta.env.R2_SECRET_ACCESS_KEY as string,
-  //   })
-  // }
-  // return _client
   return (_client ??= new AwsClient({
     accessKeyId: import.meta.env.R2_ACCESS_KEY_ID as string,
     secretAccessKey: import.meta.env.R2_SECRET_ACCESS_KEY as string,
@@ -23,6 +16,10 @@ function bucketUrl(params: Record<string, string>) {
   )
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v)
   return url.toString()
+}
+
+function objectUrl(key: string): string {
+  return `${import.meta.env.R2_ENDPOINT}/${import.meta.env.GALLERY_BUCKET}/${encodeURIComponent(key).replace(/%2F/g, '/')}`
 }
 
 function extractTags(xml: string, tag: string): string[] {
@@ -55,4 +52,22 @@ export const r2 = {
 
     return { contents, isTruncated, nextContinuationToken }
   },
+
+  async get(key: string): Promise<Uint8Array | null> {
+    const res = await getClient().fetch(objectUrl(key))
+    if (!res.ok) return null
+    return new Uint8Array(await res.arrayBuffer())
+  },
+
+  async put(key: string, body: Uint8Array, contentType: string): Promise<void> {
+    await getClient().fetch(objectUrl(key), {
+      method: 'PUT',
+      headers: { 'Content-Type': contentType },
+      body: body as BodyInit,
+    })
+  },
+}
+
+export function buildImageUrl(key: string): string {
+  return `${import.meta.env.R2_CUSTOM_DOMAIN}${key}`
 }

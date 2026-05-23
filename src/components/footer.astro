@@ -3,6 +3,15 @@ import Link from '@/components/link.astro'
 import SocialIcons from '@/components/social-icons.astro'
 import { Separator } from '@/components/ui/separator'
 import { SOCIAL_LINKS } from '@/consts'
+
+interface Props {
+  instagramHref?: string
+}
+
+const { instagramHref } = Astro.props
+const links = instagramHref
+  ? [...SOCIAL_LINKS, { href: instagramHref, label: 'Instagram' }]
+  : SOCIAL_LINKS
 ---
 
 <footer
@@ -22,5 +31,5 @@ import { SOCIAL_LINKS } from '@/consts'
       >!
     </p>
   </div>
-  <SocialIcons links={SOCIAL_LINKS} />
+  <SocialIcons links={links} />
 </footer>
