@@ -13,26 +13,23 @@ const { album } = Astro.props
 ---
 
 <div
-  class="border-foreground hover:bg-secondary/50 bg-destructive text-secondary-foreground border transition-colors duration-300 ease-in-out sm:h-auto lg:h-full"
+  class="not-prose group border-foreground bg-card text-foreground hover:bg-secondary/50 h-full border transition-colors duration-300 ease-in-out"
 >
-  <Link
-    href={`/gallery/${album.name}`}
-    class="flex h-full flex-col justify-start"
-  >
-    <div class="h-48 w-full">
+  <Link href={`/gallery/${album.name}`} class="flex h-full flex-col">
+    <div class="h-48 w-full overflow-hidden">
       <Image
         src={album.cover}
         alt={album.coverAlt}
         quality="high"
-        width="768"
-        height="480"
-        class:list={[
-          'h-full w-full object-cover object-center',
-          'group-hover:opacity-90 group-hover:shadow-lg',
-        ]}
+        width={768}
+        height={480}
+        fit="cover"
+        position="center"
+        sizes="(min-width: 1024px) 376px, (min-width: 768px) 768px, 100vw"
+        class="h-full! w-full object-cover object-center transition-opacity group-hover:opacity-90"
       />
     </div>
-    <div class="border-foreground bg-card text-foreground border-t p-2">
+    <div class="border-foreground flex-1 border-t p-2">
       <div class="mb-2 flex flex-wrap items-center justify-between gap-x-2">
         <h2 class="text-xl font-medium capitalize">
           {album.name}
